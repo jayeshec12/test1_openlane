@@ -1,0 +1,16 @@
+Top level module is digital_top. You need to read-in all of the Verilog files in this directory.
+
+The clocks are as follows:
+
+  PD_SCL = 1MHz
+  AD_OSC = 3MHz
+  control.count_reg[0] = AD_OSC/2 (this is 1.5MHz generated clock, synchronous to AD_OSC)
+  control.count_reg[9] = AD_OSC/1024 (this is about 2930KHz generated clock, synchronous to AD_OSC)
+
+Other than the AD_OSC and its 2 generated clocks, all clocks are asynchronous with respect to others. So any existing path is false path (like from PD_SCL to AD_OSC or vice versa)
+
+The reset is:
+
+  POR   (this is asynchronous power on reset)
+
+In case it helps your synthesis tool optimization, all of the state machines are one-hot.
